@@ -19,5 +19,9 @@ t/02_include_config_dir.t
 t/03_include_config_file.t
 t/config/testplugin
 t/config/testplugin2
+t/config/testplugin3
+t/config/testplugin4
 t/plugins/testplugin
 t/plugins/testplugin2
+t/plugins/testplugin3
+t/plugins/testplugin4

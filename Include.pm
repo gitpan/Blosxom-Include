@@ -6,11 +6,13 @@ use FileHandle;
 
 use vars qw($VERSION);
 
-$VERSION = 0.001000;
+$VERSION = 0.002000;
+
+my $include_pattern = qr/^#?\s*(?:IncludeConfig|__END_CONFIG__).*$/m;
 
 FILTER {
   my ($self, $plugin_name) = @_;
-  return unless m/^#?\s*IncludeConfig.*$/m;
+  return unless m/$include_pattern/;
 
   # Try and figure out $config_dir in the same way as blosxom itself
   my $config_dir = '';
@@ -34,7 +36,7 @@ FILTER {
       local $/ = undef;
       my $plugin_config = <$fh>;
       if (defined $plugin_config) {
-        my ($before, $after) = split /^#?\s*IncludeConfig.*$/m;
+        my ($before, $after) = split $include_pattern;
 
         # Munge the line count to include $plugin_config
         my $line_count = ($before =~ tr/\n//);
